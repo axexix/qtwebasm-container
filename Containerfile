@@ -1,8 +1,10 @@
-FROM    fedora:37 AS base
+ARG UPSTREAM_TAG=38
+
+FROM public.ecr.aws/docker/library/fedora:${UPSTREAM_TAG} as base
 
 ARG     EMSDK_VERSION
 
-RUN     dnf install -y cmake-3.24.1-1.fc37 curl git ninja-build xz lbzip2 perl-English \
+RUN     dnf install -y cmake curl git ninja-build xz lbzip2 perl-English \
         && alternatives --install /usr/bin/python python /usr/bin/python3 1
 
 RUN     useradd -U -s /bin/bash dev
